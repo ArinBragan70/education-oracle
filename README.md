@@ -1,96 +1,160 @@
 # Education Oracle
 
-Platform combining on-chain protocols and oracles to provide reliable oracle services.
+A decentralized platform combining on-chain protocols and oracles to provide reliable oracle services for educational data and verification.
 
 ## Overview
 
-Education Oracle is a decentralized platform that leverages blockchain technology to deliver trustworthy and verifiable oracle services. By combining on-chain smart contracts with off-chain data sources, the platform ensures data integrity and transparency for educational applications and beyond.
+Education Oracle is a blockchain-based system designed to deliver trustworthy, verifiable data through oracle services. The platform ensures data integrity and authenticity through cryptographic verification and on-chain validation mechanisms.
 
 ## Features
 
-- **Oracle Verification**: Robust verification mechanisms for oracle data submissions
-- **Claim Management**: Structured system for submitting and validating data claims
-- **Signature Verification**: Cryptographic signature verification for data authenticity
-- **Decentralized Architecture**: Fully on-chain logic for transparency and trustlessness
-- **Educational Focus**: Designed specifically for educational data and metrics
+- **Decentralized Oracle Network**: Provides reliable data feeds from multiple sources
+- **Cryptographic Verification**: Ensures data authenticity through signature validation
+- **On-Chain Validation**: All claims and data are verified on the blockchain
+- **Transparent Operations**: Complete audit trail of oracle activities
+- **Secure Architecture**: Built with security-first principles
+
+## Architecture
+
+The Education Oracle platform consists of the following components:
+
+### Oracle Verifier Contract
+
+The core smart contract responsible for:
+- Validating oracle data submissions
+- Verifying cryptographic signatures
+- Managing oracle registrations
+- Processing data claims
+- Maintaining data integrity
 
 ## Smart Contracts
 
-### Oracle Verifier
+### oracle-verifier
 
-The core contract that verifies claims and signatures related to oracle data. It provides:
+Verifies claims and signatures related to oracle data submissions. This contract ensures that all data provided by oracles is authentic and has been properly authorized.
 
-- Data submission and validation
-- Signature verification mechanisms
-- Claim status tracking
-- Access control for authorized data providers
-
-## Technology Stack
-
-- **Clarity**: Smart contract language for Stacks blockchain
-- **Clarinet**: Development environment and testing framework
-- **Stacks Blockchain**: Layer-1 blockchain for Bitcoin
+**Key Functions:**
+- Oracle registration and management
+- Signature verification
+- Claim validation
+- Data integrity checks
 
 ## Getting Started
 
 ### Prerequisites
 
-- Clarinet CLI installed
-- Node.js (v16 or higher)
-- Git
+- [Clarinet](https://github.com/hirosystems/clarinet) - Clarity runtime
+- [Node.js](https://nodejs.org/) (v16 or higher)
+- [Git](https://git-scm.com/)
 
 ### Installation
 
+1. Clone the repository:
 ```bash
-# Clone the repository
 git clone <repository-url>
-
-# Navigate to project directory
 cd education-oracle
+```
 
-# Install dependencies
+2. Install dependencies:
+```bash
 npm install
 ```
 
-### Development
+### Running Tests
 
+Execute the test suite:
 ```bash
-# Check contracts syntax
-clarinet check
-
-# Run tests
 clarinet test
-
-# Open Clarinet console
-clarinet console
 ```
 
-## Architecture
+### Contract Validation
 
-The Education Oracle platform is built on a modular architecture:
+Check contract syntax:
+```bash
+clarinet check
+```
 
-1. **Data Providers**: Submit oracle data with cryptographic signatures
-2. **Oracle Verifier Contract**: Validates submissions and maintains state
-3. **Data Consumers**: Query verified oracle data for use in applications
+## Development
 
-## Use Cases
+### Project Structure
 
-- Educational credential verification
-- Academic achievement tracking
-- Course completion attestations
-- Skill certification validation
-- Educational institution data feeds
+```
+education-oracle/
+├── contracts/           # Clarity smart contracts
+├── tests/              # Contract tests
+├── settings/           # Network configuration
+├── Clarinet.toml       # Project configuration
+└── README.md           # This file
+```
 
-## Security
+### Adding New Contracts
+
+Create a new contract:
+```bash
+clarinet contract new <contract-name>
+```
+
+## Usage
+
+### Oracle Registration
+
+Oracles must register with the platform before submitting data. Registration requires:
+- Valid public key
+- Staking requirements
+- Identity verification
+
+### Data Submission
+
+Oracles submit data with:
+- Cryptographic signatures
+- Timestamp information
+- Source verification
+- Claim details
+
+### Verification Process
+
+All submissions undergo:
+1. Signature validation
+2. Authority verification
+3. Data integrity checks
+4. On-chain recording
+
+## Security Considerations
 
 - All oracle submissions require valid signatures
-- Access control mechanisms for authorized providers
-- Immutable audit trail of all data submissions
-- On-chain verification logic for transparency
+- Multi-layer verification prevents data manipulation
+- On-chain audit trail for transparency
+- Access controls for privileged operations
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit pull requests or open issues for bugs and feature requests.
+Contributions are welcome! Please follow these guidelines:
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
+
+## Testing
+
+The project includes comprehensive tests covering:
+- Oracle registration
+- Signature verification
+- Claim validation
+- Edge cases and error handling
+
+## Deployment
+
+### Testnet Deployment
+
+```bash
+clarinet integrate
+```
+
+### Mainnet Deployment
+
+Follow the [Clarity deployment guide](https://docs.hiro.so/clarinet) for mainnet deployment procedures.
 
 ## License
 
@@ -99,3 +163,19 @@ MIT License
 ## Contact
 
 For questions and support, please open an issue in the repository.
+
+## Roadmap
+
+- [ ] Enhanced oracle reputation system
+- [ ] Multi-signature support
+- [ ] Advanced data aggregation
+- [ ] Integration with additional blockchains
+- [ ] Oracle incentivization mechanisms
+
+## Documentation
+
+For detailed documentation, visit our [docs](./docs) directory.
+
+## Acknowledgments
+
+Built with Clarity and Clarinet by Hiro Systems.
