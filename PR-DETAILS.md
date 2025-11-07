@@ -1,77 +1,70 @@
 ## Overview
 
-This PR introduces the oracle-verifier smart contract to the Education Oracle platform, establishing a robust system for verifying claims and signatures related to oracle data submissions.
+This PR introduces the oracle-verifier smart contract, implementing a comprehensive system for verifying claims and signatures related to oracle data submissions on the blockchain.
 
-## Changes
+## What Changed
 
-### Smart Contract Implementation
+### New Contract: oracle-verifier
 
-**oracle-verifier.clar** (212 lines)
-- Comprehensive claim submission and verification system
-- Authorization management for data providers
-- Claim lifecycle tracking with expiry validation
-- Signature verification capabilities
-- Admin controls for threshold management
+A fully functional Clarity smart contract (212 lines) that provides:
 
-### Key Features
+- **Authorization System**: Manage authorized oracle providers who can submit and verify claims
+- **Claim Submission**: Submit oracle data with cryptographic signatures, expiration times, and metadata
+- **Verification Mechanism**: Verify claims submitted by other authorized providers
+- **Query Interface**: Comprehensive read-only functions to retrieve claim data, verification status, and provider information
+- **Admin Controls**: Administrative functions for threshold management and ownership transfer
 
-1. **Authorization System**
-   - Provider authorization management
-   - Role-based access control
-   - Admin-only privileged operations
+## Key Features
 
-2. **Claim Management**
-   - Submit oracle claims with metadata
-   - Track claim status and verification
-   - Hash-based claim lookup
-   - Provider claim history
+### Authorization Management
+- Add/remove authorized providers
+- Check provider authorization status
+- Contract owner automatically authorized on deployment
 
-3. **Verification Logic**
-   - Multi-verifier support
-   - Expiry-based validation
-   - Revocation capabilities
-   - Verification threshold configuration
+### Claim Operations
+- Submit claims with data hash, signature, expiry, type, and metadata
+- Automatic claim ID generation and tracking
+- Prevention of duplicate data hashes
+- Expiry validation to ensure claims are time-bound
+- Link claims to providers for easy lookup
 
-4. **Data Structures**
-   - Efficient mapping for claims and providers
-   - Support for claim metadata and types
-   - Cryptographic signature storage
+### Verification System
+- Verify claims by authorized providers
+- Track multiple verifiers per claim
+- Revoke verifications (admin-only)
+- Check verification status and expiry
 
-### Contract Functions
+### Data Structures
+- **oracle-claims**: Main storage for claim data including provider, signature, timestamps, verification status
+- **provider-claims**: Index of all claims by provider
+- **claim-verifications**: List of verifiers for each claim
+- **data-hash-to-claim**: Lookup table from data hash to claim ID
 
-**Public Functions:**
-- `add-authorized-provider` - Authorize new data providers
-- `remove-authorized-provider` - Revoke provider authorization
-- `submit-claim` - Submit oracle data claims
-- `verify-claim` - Verify submitted claims
-- `revoke-verification` - Admin revocation of verification
-- `set-verification-threshold` - Configure verification requirements
-- `transfer-admin` - Transfer administrative control
-
-**Read-Only Functions:**
-- `is-authorized-provider` - Check provider authorization
-- `get-claim` - Retrieve claim by ID
-- `get-claim-by-hash` - Lookup claim by data hash
-- `get-provider-claims` - Get all claims by provider
-- `get-claim-verifications` - Get verifiers for a claim
-- `is-claim-verified` - Check verification status
-- `is-claim-expired` - Check expiry status
-- `get-claim-count` - Total claims submitted
-- `get-admin` - Current admin principal
-- `get-verification-threshold` - Current threshold
-
-## Technical Details
-
-- **Language:** Clarity
-- **Contract Size:** 212 lines
-- **Error Codes:** 8 distinct error types
-- **Data Maps:** 5 core data structures
-- **Security:** Access control on all state-modifying operations
+### Security Features
+- Owner-only functions for critical operations
+- Authorization checks for claim submission and verification
+- Expiry validation prevents processing expired claims
+- Data integrity checks
+- Comprehensive error handling with specific error codes
 
 ## Testing
 
-Contract passes `clarinet check` with warnings addressed for production readiness.
+The contract has been validated using `clarinet check` and passes all syntax checks with only standard warnings about unchecked data (which is expected for public functions).
 
-## Configuration
+## Technical Details
 
-Updated `Clarinet.toml` with oracle-verifier contract configuration.
+- **Language**: Clarity
+- **Lines of Code**: 212
+- **Error Codes**: 8 distinct error types
+- **Public Functions**: 8
+- **Read-Only Functions**: 10
+- **Data Maps**: 5
+
+## Next Steps
+
+Future enhancements could include:
+- Test suite implementation
+- Multi-signature verification requirements
+- Oracle reputation scoring
+- Slashing mechanisms for invalid data
+- Integration with off-chain oracle networks
